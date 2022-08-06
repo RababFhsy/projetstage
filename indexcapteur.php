@@ -3,7 +3,7 @@
 	session_start();
 	// Vérifiez si l'utilisateur est connecté, sinon redirigez-le vers la page de connexion
 	if(!isset($_SESSION["username"])){
-		header("Location: login.php");
+		header("Location: index.php");
 	
         exit(); 
 	}
@@ -19,7 +19,7 @@
      $t=$_SESSION['username'];
     
       $query = "SELECT * FROM `users` WHERE username='$t'";
-      $result = mysqli_query($conn,$query) or die(mysql_error());
+      $result = mysqli_query($conn,$query) or die(mysqli_connect_error());
       
 
        $user = mysqli_fetch_assoc($result);
@@ -201,7 +201,11 @@
                 <div></div></br>
         
                 </div> -->
-                <div><a  class="btn btn-outline-success"  href="createcapteur.php"> <i class="fa fa-plus" aria-hidden="true"></i> Créer un  Capteur </a>  <a  class="btn btn-outline-primary" style="width : 150px" href="indexcapteur.php"><i class="fa fa-refresh" aria-hidden="true"></i>   Actualiser </a> </div></br>
+                <div><a  class="btn btn-outline-success"  href="createcapteur.php"> <i class="fa fa-plus" aria-hidden="true"></i> Créer un  Capteur </a>  
+                <!-- <a  class="btn btn-outline-primary" style="width : 150px" href="indexcapteur.php"><i class="fa fa-refresh" aria-hidden="true"></i>   Actualiser </a> 
+            <!-- </div></br> -->
+            </div></br>
+
                 <div class="container">
                     <table  class="table table-hover"  style="width: 100%;">
                         <thead  class="table-dark">
@@ -229,7 +233,7 @@
                                 <td><?php echo $fetch['ref']?></td>
                                 <td><?php echo $fetch['valeurmax']?></td>
                                 <td><?php echo $fetch['valeurmin']?></td>
-                                <td><button  class="btn btn-success" data-toggle="modal" data-target="#update<?php echo $fetch['id']?>">Modifier</button>  <a class="btn btn-danger" href="deletecapteur.php?id=<?php echo $fetch['id']?>">Supprimer</a></td>
+                                <td><button  class="btn btn-outline-success" data-toggle="modal" data-target="#update<?php echo $fetch['id']?>">Modifier</button>  <a class="btn btn-outline-danger" href="deletecapteur.php?id=<?php echo $fetch['id']?>">Supprimer</a></td>
                             </tr>
                             
                             <div class="modal fade" id="update<?php echo $fetch['id']?>" aria-hidden="true">
@@ -266,7 +270,7 @@
                                                         <input class="form-control" type="number" value="<?php echo $fetch['valeurmin']?>" name="valeurmin"/>
                                                     </div>
                                                     <div class="form-group">
-                                                        <button class="btn btn-warning form-control" type="submit" name="update">Modifier</button>
+                                                        <button class="btn btn-outline-warning form-control" type="submit" name="update">Modifier</button>
                                                     </div>
                                                 </div>	
                                             </div>	

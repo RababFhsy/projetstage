@@ -56,7 +56,7 @@
                                         <a class="small" href="register.php">Créer un compte!</a>
                                     </div>
                                     <div class="text-center">
-                                        <a class="small" href="login.php">Vous avez déja un compte? Login!</a>
+                                        <a class="small" href="index.php">Vous avez déja un compte? Login!</a>
                                     </div>
                                 </div>
                             </div>

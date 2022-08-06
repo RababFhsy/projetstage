@@ -3,7 +3,7 @@
 	session_start();
 	// Vérifiez si l'utilisateur est connecté, sinon redirigez-le vers la page de connexion
 	if(!isset($_SESSION["username"])){
-		header("Location: login.php");
+		header("Location: index.php");
 	
         exit(); 
 	}
@@ -19,7 +19,7 @@
      $t=$_SESSION['username'];
     
       $query = "SELECT * FROM `users` WHERE username='$t'";
-      $result = mysqli_query($conn,$query) or die(mysql_error());
+      $result = mysqli_query($conn,$query) or die(mysqli_connect_error());
       
 
        $user = mysqli_fetch_assoc($result);

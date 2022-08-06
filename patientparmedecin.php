@@ -3,7 +3,7 @@
 	session_start();
 	// Vérifiez si l'utilisateur est connecté, sinon redirigez-le vers la page de connexion
 	if(!isset($_SESSION["username"])){
-		header("Location: login.php");
+		header("Location: index.php");
 	
         exit(); 
 	}
@@ -19,7 +19,7 @@
      $t=$_SESSION['username'];
     
       $query = "SELECT * FROM `users` WHERE username='$t'";
-      $result = mysqli_query($conn,$query) or die(mysql_error());
+      $result = mysqli_query($conn,$query) or die(mysqli_connect_error());
       
 
        $user = mysqli_fetch_assoc($result);
@@ -78,7 +78,7 @@
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                   
-                    <h3 class="menu-title">Gestion</h3><!-- /.menu-title -->
+                    <h3 class="menu-title">Espace Médecin</h3><!-- /.menu-title -->
 					<li>
                         <a href="indexmed.php"> <i class="menu-icon fa fa-dashboard"></i>Home </a>
                     </li>
@@ -140,11 +140,11 @@
                         </a>
 
                         <div class="user-menu dropdown-menu">
-                            <a class="nav-link" href="profile.php"><i class="fa fa-user"></i> Profile</a>
+                            <a class="nav-link" href="profile.php"><i class="fa fa-user"></i> My Profile</a>
 
                           
 
-                            <a class="nav-link" href="logout.php"><i class="fa fa-power-off"></i> déconnexion</a>
+                            <a class="nav-link" href="logout.php"><i class="fa fa-power-off"></i> Logout</a>
                         </div>
                     </div>
 
@@ -190,7 +190,7 @@
             </div>
         </div> -->
 
-        <div class="content mt-3">
+        <!-- <div class="content mt-3">
 
             <div class="col-sm-12">
 
@@ -199,9 +199,9 @@
 		<div class="col-md-6" >
 		
 
-		</div>
+		</div> -->
 			<table class="table table-hover" style="margin-left : 15px; width: 1000px;">
-				<thead class="table-dark">
+				<thead  class="table-dark">
 					<tr>
 						<th>Nom de Patient</th>
                         <th>Date de naissance </th>
@@ -238,7 +238,7 @@
 
 
 				
-	<td><input type="submit" onclick="$('.typebassoc').change();" class="btn btn-outline-dark" data-toggle="modal" data-target="#update<?php echo $fetch['id']?>"  value ="Affecter un Boitier ">| <a class="btn btn-danger btn-sm" href="deletepatient.php?id=<?php echo $fetch['id']?>">Supprimer</a></td>
+	<td><input type="submit" onclick="$('.typebassoc').change();" class="btn btn-outline-dark" data-toggle="modal" data-target="#update<?php echo $fetch['id']?>"  value ="Affecter un Boitier ">   <a class="btn btn-outline-danger" href="deletepatient.php?id=<?php echo $fetch['id']?>">Supprimer</a></td>
 
 						
 					  
@@ -264,27 +264,31 @@
 											
 											<div class="form-group">
                                             <input type="hidden" value="<?php echo $fetch['id']?>" name="id"/>
-                                            <label> Type </label> 
+                                            <label> Référence  Boitier</label> 
 
 
-                                            <select class="form-control typebassoc" name="type" >
+                                            <select class="form-control typebassoc" name="ref" >
+											<option>Choisir référence</option>
 																	<?php
 						require 'conn.php';
-						$sql21= $conn->prepare("SELECT distinct type,id FROM `boitier`");
+						$sql21= $conn->prepare("SELECT * FROM `boitier`");
 						$sql21->execute();
 						while($fetch21= $sql21->fetch()){
 
 							$assoc = [];
                             $t=$fetch21['id'];
-                            $sql7= $conn->prepare("SELECT * FROM capteur where id in (select idc from association where idb ='$t')");
+                            $sql7= $conn->prepare("select c.type,c.valeurmax,c.valeurmin,c.ref,a.frequence from capteur c,association a where
+							c.id=a.idc and idb=$t");
                             $sql7->execute();
+							
 
                              while($fetch7= $sql7->fetch()){
                             	$assoc[] = $fetch7;
                             }
+							
 					?>
-							<option data-assoc=<?php echo "'".json_encode($assoc)."'"; ?> value="<?php echo $fetch21['type'] ?> ">
-							<?php echo $fetch21['type']  ?> 
+							<option   data-assoc=<?php echo "'".json_encode($assoc)."'"; ?> value="<?php echo $fetch21['ref'] ?> ">
+							<?php echo $fetch21['ref']  ?> 
 							</option>
 							<?php } ?>
 						    </select>
@@ -295,7 +299,7 @@
 				</div>
 			
 											<div class="form-group">
-												<button class="btn btn-outline-dark" type="submit" name="affecter">Affecter</button>
+												<button class="btn btn-outline-dark form-control" type="submit" name="affecter">Affecter</button>
 											</div>
 										</div>	
 									</div>	
@@ -334,8 +338,7 @@
 
 
 				
-	<td><input type="submit" class="btn btn-outline-dark" data-toggle="modal" data-target="#update<?php echo $fetch['id']?>" onclick="$('.typebassoc').change();"  value ="Reaffecter un Boitier ">
-	<a class="btn btn-outline-danger" href="deletepatient.php?id=<?php echo $fetch['id']?>">Supprimer</a></td>
+	<td><input type="submit" class="btn btn-outline-dark" data-toggle="modal" data-target="#update<?php echo $fetch['id']?>" onclick="$('.typebassoc').change();"  value ="Reaffecter un Boitier ">  <a class="btn btn-outline-danger" href="deletepatient.php?id=<?php echo $fetch['id']?>">Supprimer</a></td>
 
     <td>
 						<button  class="btn btn-outline-primary" data-toggle="modal"  data-target="#up<?php echo $fetch['id']?>">Voir détails de boitier </button>
@@ -344,12 +347,12 @@
 						<div class="modal fade" id="up<?php echo $fetch['id']?>"  style="width=1000px" aria-hidden="true">
 						<div class="modal-dialog" style="width=1000px">
 							<div class="modal-content" style="width=1000px" >
-								<div  class="text-danger alert alert-danger "  style="text-align:center">
-								<label  >Boitier </label></div>
-								<table id="example" class="table table-hover" style="width:100%">
-									<thead class="table-dark" >
+								<div  class="text-danger alert alert-danger ">
+								<label  > Information Boitier </label></div>
+								<table id="example" class="table table-hover"  style="width:100%">
+									<thead  class="table-dark" >
 									
-                                    <th>Type de Boitier </th>		
+                                    <th>Référence de Boitier </th>		
 						<th>Date de l'affectation</th>
 					
                         <th>Nombre de Capteur</th>
@@ -380,7 +383,7 @@
 
 					
 				?>
-						<td><?php echo $fetch3['type']?></td>	
+						<td><?php echo $fetch3['ref']?></td>	
 						<td><?php echo $fetch1['datedebut']?></td>
 						
                         <td><?php echo $idb ?></td>	
@@ -388,7 +391,7 @@
 </table>
 				
 							<div class="modal-footer">
-										<button  class="btn btn-danger" data-dismiss="modal">Close</button>
+										<button class="btn btn-danger" data-dismiss="modal">Close</button>
 
 									</div>		
 						</div>
@@ -404,7 +407,7 @@
                     </button>
 			
 				
-
+                
                     <?php } ?> 
 
 					</tr>
@@ -418,7 +421,7 @@
 								
 								<form method="POST" action="reaffecterboitier.php">
 									<div class="modal-header">
-										<h3 class="modal-title">Affecter Boitier </h3>
+										<h3 class="modal-title">Reaffecter Boitier </h3>
 									</div>	
 									<div class="modal-body">
 										<div class="col-md-6 listassoc">
@@ -432,8 +435,9 @@
 											<input type="hidden" value="<?php echo $b?>" name="idp"/>
 
 			
-                                            <label> Type </label> 
-                                            <select class="form-control typebassoc" name="type">
+                                            <label> Référence Boitier </label> 
+                                            <select class="form-control typebassoc" name="ref">
+											<option>Modifier référence</option>
 																	<?php
 						require 'conn.php';
 						$sql21= $conn->prepare("SELECT * FROM boitier ");
@@ -443,7 +447,8 @@
 						while($fetch21= $sql21->fetch()){
 							$assoc = [];
                             $t=$fetch21['id'];
-                            $sql7= $conn->prepare("SELECT * FROM capteur where id in (select idc from association where idb ='$t')");
+                            $sql7= $conn->prepare("select c.type,c.valeurmax,c.valeurmin,c.ref,a.frequence from capteur c,association a where
+							c.id=a.idc and idb=$t");
                             $sql7->execute();
 
                             while($fetch7= $sql7->fetch()){
@@ -453,8 +458,8 @@
                            
 
 					?>
-							<option data-assoc=<?php echo "'".json_encode($assoc)."'"; ?> value="<?php echo $fetch21['type'] ?> ">
-							<?php echo $fetch21['type'] ?></option>
+							<option data-assoc=<?php echo "'".json_encode($assoc)."'"; ?> value="<?php echo $fetch21['ref'] ?> ">
+							<?php echo $fetch21['ref'] ?></option>
 							<?php } ?>
 						    </select>
                             <div class="form-group">
@@ -473,7 +478,7 @@
                                     </form>
 									<br style="clear:both;"/>
 									<div class="modal-footer">
-										<button class="btn btn-danger" data-dismiss="modal">Close</button>
+										<button class="btn btn-danger" data-dismiss="modal">Fermer</button>
 									</div>
 								</form>
 					
@@ -500,7 +505,7 @@
 					<div class="modal-dialog" >
 							<div class="modal-content" >
                               <form action="patientparmedecin.php" >
-								<div  class="text-dark alert alert-light "  style="text-align:center;">
+								<div  class="text-danger alert alert-light "  style="text-align:center;">
                                 <div style="height : 10% ">
 
                                <div id="chartContainer">
@@ -512,7 +517,7 @@
                           
 
 							<div class="modal-footer">
-										<button class="btn btn-danger" data-dismiss="modal">Close</button>
+										<button class="btn btn-danger" data-dismiss="modal">Fermer</button>
 
 									</div>	
                     </form>	
@@ -850,10 +855,12 @@ for (let i = 0; i < nombrecapture; i++) {
 var as = JSON.parse($('option:selected', this).attr('data-assoc'));
 	    $.each(as, function(index, value) {
 		  $('<div />', {
-		    'text': "***Type de capteur : " + value.type + ", Vmax: " + value.valeurmax + ", Vmin: " + value.valeurmin 
+		    'text': "Type de capteur : " + value.type + ", Vmax: " + value.valeurmax + ", Vmin: " + value.valeurmin + "  Référence de capteur : " + value.ref + ", frequence :" +value.frequence + "   "  +"***************************"
 		  }).appendTo('.listassoc');
+		 
 		});
 	});
+	
     </script>
 
 </body>

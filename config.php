@@ -1,9 +1,9 @@
 <?php
 // Informations d'identification
-define('DB_SERVER', ' remotemysql.com');
-define('DB_USERNAME', 'sqx6F9pr6V');
-define('DB_PASSWORD', '2lV1fCz6Vh');
-define('DB_NAME', 'sqx6F9pr6V');
+define('DB_SERVER', 'localhost');
+define('DB_USERNAME', 'root');
+define('DB_PASSWORD', '');
+define('DB_NAME', 'gestion_cab');
  
 // Connexion � la base de donn�es MySQL 
 $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
