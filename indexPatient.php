@@ -250,19 +250,31 @@
                                             <div class="form-group">
 												
 												<label>Nom de Medecin</label>
-				                               <select class="form-control" name="nommedecin">
-																	<option>Autre</option>
+				                               <select class="form-control" name="nommedecin" >
+                                               
+							                           
+                                                       <option > 
+							                <?php echo $selected=$fetch1['fullname']  ?> 
+							                </option> -->
+                            
+                                             
+																
 																	<?php
 						                 require 'conn.php';
 						                 $sql1 = $conn->prepare("SELECT distinct fullname FROM `medecin`");
 					                	$sql1->execute();
 					                 	while($fetch1 = $sql1->fetch()){
+                                            
+                                            // if ( $fetch1 == $selected ){
+                                            //     echo' $selected ="selected"';
+                                            // }
 					                    ?>
-						                   	<option value="<?php echo $fetch1['fullname'] ?> "> Dr.
+						                   	<option > Dr.
 							                <?php echo $fetch1['fullname']  ?> 
 							                </option>
 							                <?php } ?>
-						                    </select>
+                                            </select>
+						                    
 
 											</div>
 											<div class="form-group">

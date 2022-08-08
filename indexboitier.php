@@ -254,23 +254,23 @@
 			
 					
 						<div class="modal fade" id="up<?php echo $fetch['id']?>"  aria-hidden="true">
-						<div class="modal-dialog" style="width: 1000px;">
-							<div class="modal-content" style="width: 800px;">
-								<div  class="text-danger alert alert-danger "  style="text-align:center;width: 800px;">
-								<label > Ses Capteurs </label></div>
+						<div class="modal-dialog" style="width: 100px;">
+							<div class="modal-content" style="width: 400px;">
+								<div  class="text-dark alert alert-light "  style="text-align:center;width: 400px;">
+								<label > SES CAPTEURS</label></div>
 								<table class="table table-hover" style= " width:400px;">
-									<thead class="table-dark" style="width: 400px;">
-									<th>Numero</th>
+									<!-- <thead class="table-dark" style="width: 400px;"> -->
+									<!-- <th>Numero</th>
 									
 						<th>Type</th>
 						<th>Photo</th>
 						<th>Ref</th>
 						<th>Valeurmax</th>
 						<th>Valeurmin</th>
-						<th>Branche</th>
+						<th>Branche</th> -->
 
-                        <th>Frequence</th>
-									</thead>
+                       
+									<!-- </thead> -->
 									<tbody>
 									<?php
 						$id = $fetch['id'];
@@ -278,15 +278,17 @@
 			
 						$sql1->execute();
 						$t=0;
-                        $sql2= $conn->prepare("select  DISTINCT frequence,branche from `association` WHERE `idb`=$id ") ;
-                        $sql2->execute();
-				
-						while($row = $sql2->fetch()){
-                            $ma=$row['branche'];
-                            $ba=$row['frequence'];
-                            print_r($ma);
-                            print_r($ba);
-                        }
+                        $sql2= "select  DISTINCT frequence,branche from `association` WHERE `idb`=$id ";
+                       
+                        $stmt12=$conn->query($sql2);
+                        $row12= $stmt12->fetchAll(PDO::FETCH_ASSOC);
+				if($row12){
+						foreach($row12 as $array12){
+                            $ma=$array12['branche'];
+                            $ba=$array12['frequence'];
+
+                           
+                        
 					while($fetch1 = $sql1->fetch()){
 						$t=$t+1;
 						$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -294,17 +296,43 @@
 						
                             
                         
-					
-                    ?>
-						<td><?php echo $t?></td>	
-						<td><?php echo $fetch1['type']?></td>
-						<td> <img width="150px " src="<?php echo $fetch1['photo']?>"/></td>
-						<td><?php echo $fetch1['ref']?></td>
-						<td><?php echo $fetch1['valeurmax']?></td>
-						<td><?php echo $fetch1['valeurmin']?></td>
-					    <td><?php echo $ma ?></td>
-                        <td><?php echo $ba ?></td>
-                    </tbody><?php } ?></table>
+                        
+                    ?><thead  class="table-danger" >
+                    <th>NUMERO</th></thead>
+                    </thead>
+						<tr><td><?php echo $t?></td></tr>
+                        <thead  class="table-danger" >
+                         <th>Type</th>	
+                    </thead>
+						<tr><td><?php echo $fetch1['type']?></td></tr>
+                        <thead  class="table-danger" >
+                        <th>Photo</th>
+                        </thead>
+						<tr><td> <img width="150px " src="<?php echo $fetch1['photo']?>"/></td></tr>
+                        <thead  class="table-danger" >
+                        <th>REFERENCE</th>
+                        </thead>
+						<tr><td><?php echo $fetch1['ref']?></td></tr>
+                        <thead  class="table-danger" >
+                        <th>VALEURMAX</th>
+                        </thead>
+						<tr><td><?php echo $fetch1['valeurmax']?></td></tr>
+                        <thead  class="table-danger" >
+                        <th>VALEURMIN</th>
+                        </thead>
+						<tr><td><?php echo $fetch1['valeurmin']?></td></tr>
+                        <thead  class="table-danger" >
+                        <th>Branche</th>
+                        </thead>
+                            <td><?php echo $ma ?></td>
+                            <thead  class="table-danger" >
+                            <th>Frequence</th>
+                    </thead>
+                             <td><?php echo $ba ?></td>
+					   
+                       
+                       
+                    </tbody><?php } }}?></table>
 				
 							<div class="modal-footer">
 										<button class="btn btn-danger" data-dismiss="modal">Fermer</button>
@@ -377,9 +405,9 @@
                         $sql2="select * from `association` WHERE `idb`=$id";
 						$stmt = $conn->query($sql2);
 						foreach($stmt as $row){
-                        print_r($idc=$row['branche']);
-                        print_r($f=$row['frequence']);
-                        }
+                        $idc=$row['branche'];
+                        $f=$row['frequence'];
+                        
 						$t=0;
 					while($fetch5 = $sql5->fetch()){
                         $t=$t+1;
@@ -408,7 +436,8 @@
     <div class="col">
     <h6>Frequence</h6>
     <?php echo $f ?>
-    </div>                 
+    </div> 
+                                   
     
     <div class="col">
     <a href="deletecapteur1.php?id=<?php echo $fetch5['id'] ?>" class="text-danger">Supprimer</a>
@@ -428,7 +457,7 @@ width: 25%;
                         </style>
 
 
-<?php } ?>
+<?php } }?>
 
 											
 											<div class="form-group">

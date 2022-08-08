@@ -264,6 +264,8 @@
 											
 											<div class="form-group">
                                             <input type="hidden" value="<?php echo $fetch['id']?>" name="id"/>
+											
+
                                             <label> Référence  Boitier</label> 
 
 
@@ -277,7 +279,7 @@
 
 							$assoc = [];
                             $t=$fetch21['id'];
-                            $sql7= $conn->prepare("select c.type,c.valeurmax,c.valeurmin,c.ref,a.frequence from capteur c,association a where
+                            $sql7= $conn->prepare("select c.type,c.valeurmax,c.valeurmin,c.ref,a.frequence ,a.branche from capteur c,association a where
 							c.id=a.idc and idb=$t");
                             $sql7->execute();
 							
@@ -347,20 +349,9 @@
 						<div class="modal fade" id="up<?php echo $fetch['id']?>"  style="width=1000px" aria-hidden="true">
 						<div class="modal-dialog" style="width=1000px">
 							<div class="modal-content" style="width=1000px" >
-								<div  class="text-danger alert alert-danger ">
-								<label  > Information Boitier </label></div>
-								<table id="example" class="table table-hover"  style="width:100%">
-									<thead  class="table-dark" >
-									
-                                    <th>Référence de Boitier </th>		
-						<th>Date de l'affectation</th>
-					
-                        <th>Nombre de Capteur</th>
-                       
-                      
-
-					
-									</thead>
+								<div  class="text-dark alert alert-light ">
+								<label  ><Strong> INFORMATION BOITIER </Strong></label></div>
+								<table id="example" class="table table-hover">
 									<tbody>
 									<?php
 						$id = $fetch['id'];
@@ -368,30 +359,85 @@
 						$sql1->execute();
                         $sql3 = $conn->prepare("select * from `boitier` WHERE `id`  in (select `idb` from `patientboitier` where `idp`='$id')");
 						$sql3->execute();
-                      
-						$sql50 = $conn->prepare("select * from `capteur` WHERE `id`  in (select `idc` from `association` where `idb`='$id')");
-						$sql50->execute();
+						$fetch3=$sql3->execute();
 						
+						
+						
+						  
 					while($fetch1 = $sql1->fetch()  ){
                         $fetch3=$sql3->fetch();
-                        
-			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $sql3="select count(idc) as id  from `association` where idb in (select id from `boitier` WHERE `id`  in (select `idb` from `patientboitier` where `idp`='$id'))";
-            $stmt1 = $conn->query($sql3);
+						
+						        
+			
+			
+            $sql30="select count(idc) as id  from `association` where idb in (select id from `boitier` WHERE `id`  in (select `idb` from `patientboitier` where `idp`='$id'))";
+            $stmt1 = $conn->query($sql30);
             $row1 = $stmt1->fetch(PDO::FETCH_ASSOC);
             $idb=$row1['id'];
+			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			
+			 
+			$ta=$fetch3['id'];
+			$sql50 ="select c.type,a.frequence,a.branche from capteur c,association a where
+			c.id=a.idc and idb='$ta'";
+						
+			$stmt11 = $conn->query($sql50);
+            $row11 = $stmt11->fetchAll(PDO::FETCH_ASSOC);
+			if($row11){
+				foreach($row11 as $array11){
+            $idca=$array11['type'];
+			$idco=$array11['frequence'];
+			$idci=$array11['branche'];
+			
+			?>
+			<thead  class="table-danger" >
+			<th>DONNEES CAPTEURS</th>
+			</thead>
+			<tr>
+			<td> Type de capteur :
+				<?php echo $idca?>
+				</br>
+						<span >Branche :
+							<?php echo $idci?></span></br>
+						<span>Fréquence:
+							<?php echo $idco?></span></br>
+						</td>
+				</tr>
+			
+						
+						<?php
+		}}
+		
+			
+			
+			
+			
+			
+			
+			
+			
 
 					
 				?>
-						<td><?php echo $fetch3['ref']?></td>	
-						<td><?php echo $fetch1['datedebut']?></td>
-						
-                        <td><?php echo $idb ?></td>	
+				<thead  class="table-danger" >
+				<th>REFERENCE BOITIER</th>
+				</thead>
+				<tr><td><?php echo $fetch3['ref']?></td></tr>
+				<thead  class="table-danger" >
+				<th>DATE</th>
+				</thead>
+				<tr><td><?php echo $fetch1['datedebut']?></td></tr>
+				<thead  class="table-danger" >
+				<th>NOMBRE CAPTEURS</th>
+				</thead>
+				<tr><td><?php echo $idb ?></td></tr>	
+			
+							
          
 </table>
 				
 							<div class="modal-footer">
-										<button class="btn btn-danger" data-dismiss="modal">Close</button>
+										<button class="btn btn-danger" data-dismiss="modal">Fermer</button>
 
 									</div>		
 						</div>
@@ -436,7 +482,7 @@
 
 			
                                             <label> Référence Boitier </label> 
-                                            <select class="form-control typebassoc" name="ref">
+                                            <select class="form-control typebassoc" name="ref" >
 											<option>Modifier référence</option>
 																	<?php
 						require 'conn.php';
@@ -447,7 +493,7 @@
 						while($fetch21= $sql21->fetch()){
 							$assoc = [];
                             $t=$fetch21['id'];
-                            $sql7= $conn->prepare("select c.type,c.valeurmax,c.valeurmin,c.ref,a.frequence from capteur c,association a where
+                            $sql7= $conn->prepare("select c.type,c.valeurmax,c.valeurmin,c.ref,a.frequence,a.branche from capteur c,association a where
 							c.id=a.idc and idb=$t");
                             $sql7->execute();
 
@@ -476,7 +522,7 @@
 									</div>
 								</div>
                                     </form>
-									<br style="clear:both;"/>
+									<br/>
 									<div class="modal-footer">
 										<button class="btn btn-danger" data-dismiss="modal">Fermer</button>
 									</div>
@@ -500,13 +546,13 @@
 	
 	</div>
 
-<div class="modal fade" id="p"  style="height : 50% " >
+<div class="modal fade" id="p"  style="height=50% " >
             
 					<div class="modal-dialog" >
 							<div class="modal-content" >
                               <form action="patientparmedecin.php" >
-								<div  class="text-danger alert alert-light "  style="text-align:center;">
-                                <div style="height : 10% ">
+								<div  class="text-danger alert alert-light "  >
+                                <div style="height=10% ">
 
                                <div id="chartContainer">
 
@@ -855,7 +901,7 @@ for (let i = 0; i < nombrecapture; i++) {
 var as = JSON.parse($('option:selected', this).attr('data-assoc'));
 	    $.each(as, function(index, value) {
 		  $('<div />', {
-		    'text': "Type de capteur : " + value.type + ", Vmax: " + value.valeurmax + ", Vmin: " + value.valeurmin + "  Référence de capteur : " + value.ref + ", frequence :" +value.frequence + "   "  +"***************************"
+		    'text': "Type de capteur : " + value.type + ", Vmax: " + value.valeurmax + ", Vmin: " + value.valeurmin + "  Référence de capteur : " + value.ref + ", frequence :" +value.frequence + "Branche :  "+value.branche + "   "  +"***************************"
 		  }).appendTo('.listassoc');
 		 
 		});
