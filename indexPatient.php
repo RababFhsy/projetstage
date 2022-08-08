@@ -190,7 +190,7 @@
 			
 		<div   style="margin : 30px;">
 		
-        <div><a  class="btn btn-success"  href="ajouterpatient.php"><i class="fa fa-plus" aria-hidden="true"></i>  compte patient </a>  <a  class="btn btn-primary" style="width : 150px" href="indexPatient.php"><i class="fa fa-refresh" aria-hidden="true"></i>   Actualiser </a> </div></br>
+        <div><a  class="btn btn-success"  href="ajouterpatient.php"><i class="fa fa-plus" aria-hidden="true"></i>  compte patient </a> </div></br>
                 <div></div></br>
         
 			<table id="employee_data"   class="table table-hover"  style="width : 1000px">
