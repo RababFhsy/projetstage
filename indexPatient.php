@@ -254,7 +254,7 @@
                                                
 							                           
                                                        <option > 
-							                <?php echo $selected=$fetch1['fullname']  ?> 
+							                <?php echo $fetch1['fullname']  ?> 
 							                </option> -->
                             
                                              
