@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : sam. 06 août 2022 à 00:23
--- Version du serveur : 10.4.24-MariaDB
--- Version de PHP : 8.1.6
+-- Généré le : mar. 09 août 2022 à 11:59
+-- Version du serveur : 10.4.22-MariaDB
+-- Version de PHP : 8.1.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -238,17 +238,11 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `username`, `email`, `type`, `password`) VALUES
 (37, 'bahae', 'bahae@gmail.com', 'super admin', '15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225'),
-(52, 'kaoutar', 'kaouta@gmail.com', 'medecin', '15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225'),
-(53, 'yassine', 'yassine@gmail.com', 'medecin', '15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225'),
-(54, 'Mohamed', 'mohamed@gmail.com', 'medecin', '15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225'),
-(55, 'najia', 'noura@gmail.com', 'medecin', '15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225'),
-(56, 'sanaa', 'yassmine@gmail.com', 'medecin', '15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225'),
 (57, 'nawal', 'nawal@gmail.com', 'secretaire', '15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225'),
 (58, 'khadija', 'khadijaa@gmail.com', 'secretaire', '15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225'),
 (59, 'abdelhafid', 'abdelhafid@gmail.com', 'secretaire', '15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225'),
 (60, 'salma', 'salma@gmail.com', 'secretaire', '15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225'),
 (61, 'yassmina', 'yassmina@gmail.com', 'secretaire', '15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225'),
-(64, 'salimee', 'salimee@gmail.com', 'medecin', '15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225'),
 (67, 'samiraa', 'samira@gamil.com', 'secretaire', '15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225'),
 (68, 'medecin1', 'medecin1@gmail.com', 'medecin', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3'),
 (69, 'medecin2', 'medecin2@gmail.com', 'medecin', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3'),
