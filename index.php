@@ -120,7 +120,7 @@ if (isset($_POST['username'])){
                           
 
                                 </div>
-                                <button type="submit" name="submit" class="btn btn-outline-primary"  style="border: 3px solid #1977cc;border-radius: 35px">Se connecter </button>
+                                <button type="submit" name="submit" class="btn btn-outline-primary"  style="border: 3px solid #1977cc;border-radius: 35px">Se enregistrer </button>
                                 <div class="social-login-content">
                                   
                                 </div>
