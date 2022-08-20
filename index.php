@@ -39,8 +39,8 @@
 
 </head>
 
-<body>
-<style>
+<body style="background-color:#f2f4ff; ">
+<!-- <style>
     body{
  background-image: url("medecin.webp");
     display: block;
@@ -64,7 +64,7 @@
       
    }
 
-</style>
+</style> -->
     <?php
 require('config.php');
 session_start();
@@ -100,30 +100,48 @@ if (isset($_POST['username'])){
    
         
             <div class="login-content">
-                <div class="login-logo">
-                   
-                </div>
-                <div class="login-form" style=" border-radius: 20px">
+                
+                <div class="login-form" style=" border-radius: 2px;height: 570px;">
+                
                 <form action="" method="post" name="login" >
-                        <div class="form-group">
-                            <label>Nom d'utilisateur </label>
-                            <input type="text" class="form-control" name="username" placeholder="Nom">
-                        </div>
-                            <div class="form-group">
-                                <label>Mot de passe </label>
-                                <input type="password" class="form-control" name="password" placeholder="Mot de passe ">
-                        </div>
-                                <div class="checkbox">
+                    
+                 <h1><img  class="center" src="e-medecal.png" width="170px " height="170px"  alt="logo"></h1>
+                 <style>
+                 .center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+</style>
+                
+              
+                        
+                           
+                            
+<div class="container">
+<label style="padding: bottom 200px;"><b>  Nom</b></label>
+                            <input type="text" class="form-control" name="username" placeholder="nom">
+                            
+                            <br>
+                        
+                            
+                                <label><b>  Mot de Passe</b></label>
+                                 
+                                <input type="password" class="form-control" name="password" placeholder="mot de passe ">
+                                <br><br>
+                       
+                                
                                     <label>
                                 <input type="checkbox" style="color: #1977cc;"> Souvenez-vous de moi?
                             </label>
+                            <br><br>
                           
 
+                                
+                                <button type="submit" name="submit" class="btn btn-primary"  style="border: 3px solid #1977cc;border-radius: 10px"><b>Se Connecter </b></button>
                                 </div>
-                                <button type="submit" name="submit" class="btn btn-outline-primary"  style="border: 3px solid #1977cc;border-radius: 35px">Se enregistrer </button>
-                                <div class="social-login-content">
-                                  
-                                </div>
+</div>
                                 <!-- <p class="box-register">Vous êtes nouveau ici? <a href="register.php" class="text-danger">S'inscrire</a></p> -->
 	<?php if (! empty($message)) { ?>
     <p class="errorMessage"><?php echo $message; ?></p>

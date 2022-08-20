@@ -248,7 +248,7 @@
 
 				</tr>
 					
-					<div class="modal fade" id="update<?php echo $fetch['id']?>" aria-hidden="true">
+					<div class="modal fade lg" id="update<?php echo $fetch['id']?>" aria-hidden="true">
 						<div class="modal-dialog">
 							<div class="modal-content">
 								
@@ -347,8 +347,9 @@
 			
 					
 						<div class="modal fade" id="up<?php echo $fetch['id']?>"  style="width=1000px" aria-hidden="true">
-						<div class="modal-dialog" style="width=1000px">
-							<div class="modal-content" style="width=1000px" >
+						<div class="modal-dialog modal-lg">
+							
+							<div class="modal-content modal-lg" >
 								<div  class="text-dark alert alert-light ">
 								<label  ><Strong> INFORMATION BOITIER </Strong></label></div>
 								<table id="example" class="table table-hover">
@@ -378,33 +379,80 @@
 			
 			 
 			$ta=$fetch3['id'];
-			$sql50 ="select c.type,a.frequence,a.branche from capteur c,association a where
+			$sql50 ="select c.type,a.frequence,a.branche,c.photo from capteur c,association a where
 			c.id=a.idc and idb='$ta'";
+			?>
+			
+			<thead  class="table-light" >
+			
+				<td><b>Référence boitier</b> : 
+				     <span class="weak"><?php echo $fetch3['ref']?></td>
+				
+				</thead>
+					
+				<thead  class="table-light" >
+				
+				<td><b>Date</b>        <span>      :  </span>             <?php echo $fetch1['datedebut']?></td>
+				</thead>
+				
+				<thead  class="table-light" >
+				<td><b>Nombre capteurs</b> :
+				 <?php echo $idb ?></td>
+				</thead>
+				
+				
+			<td><b>Liste des capteurs </b></td>
+			<div class="row">
+				<table>
+					<thead>
+					<th>Type</th>
+					<th>Branche</th>
+					<th>Fréquence</th>
+					<th>Photo</th>
+					</thead>
+					<tbody>
+					
+			<?php
 						
 			$stmt11 = $conn->query($sql50);
             $row11 = $stmt11->fetchAll(PDO::FETCH_ASSOC);
 			if($row11){
+				$t=0;
 				foreach($row11 as $array11){
+					$t=$t+1;
             $idca=$array11['type'];
+			$idcap=$array11['photo'];
 			$idco=$array11['frequence'];
 			$idci=$array11['branche'];
 			
 			?>
-			<thead  class="table-danger" >
-			<th>DONNEES CAPTEURS</th>
-			</thead>
 			<tr>
-			<td> Type de capteur :
-				<?php echo $idca?>
-				</br>
-						<span >Branche :
-							<?php echo $idci?></span></br>
-						<span>Fréquence:
-							<?php echo $idco?></span></br>
-						</td>
-				</tr>
-			
+			<td><?php echo $idca?></td>
+			<td><?php echo $idci?></td>
+			<td><?php echo $idco?></td>
+			<td><img width="70px " src="<?php echo $idcap?>"/></td></tr>
+					</tbody>
+				
+				
+				
 						
+				
+						
+			
+			
+			
+			
+			
+			
+			
+			
+			
+				
+			
+				
+				
+			
+					
 						<?php
 		}}
 		
@@ -419,18 +467,7 @@
 
 					
 				?>
-				<thead  class="table-danger" >
-				<th>REFERENCE BOITIER</th>
-				</thead>
-				<tr><td><?php echo $fetch3['ref']?></td></tr>
-				<thead  class="table-danger" >
-				<th>DATE</th>
-				</thead>
-				<tr><td><?php echo $fetch1['datedebut']?></td></tr>
-				<thead  class="table-danger" >
-				<th>NOMBRE CAPTEURS</th>
-				</thead>
-				<tr><td><?php echo $idb ?></td></tr>	
+				
 			
 							
          
@@ -546,43 +583,42 @@
 	
 	</div>
 
-<div class="modal fade" id="p"  style="height=50% " >
+	<div class="modal fade" id="p"  style="height=50% " >
             
-					<div class="modal-dialog" >
-							<div class="modal-content" >
-                              <form action="patientparmedecin.php" >
-								<div  class="text-danger alert alert-light "  >
-                                <div style="height=10% ">
+			<div class="modal-dialog" >
+					<div class="modal-content" >
+					  <form action="patientparmedecin.php" >
+						<div  class="text-danger alert alert-light "  >
+						<div style="height=10% ">
 
-                               <div id="chartContainer">
+						<div id="chartContainer">
 
 
-                             
+					 
 
-                               </div>
-                          
+					   </div>
+				  
 
-							<div class="modal-footer">
-										<button class="btn btn-danger" data-dismiss="modal">Fermer</button>
+					<div class="modal-footer">
+								<button class="btn btn-danger" data-dismiss="modal">Fermer</button>
 
-									</div>	
-                    </form>	
-						</div>
-                        
-						</div>
-                    
-					</div>
+							</div>	
+			</form>	
+				</div>
+				
+				</div>
+			
+			</div>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-        <script type="text/javascript" src="jquery.js"></script>
-        <script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<script type="text/javascript" src="jquery.js"></script>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script>
 
 $(document).ready(function() {
-    $('#example').DataTable();
-    
-
-    
+$('#example').DataTable(); 
 } );
+
 function fat(nombrecapture){
 
 //vider la zone des charts
@@ -590,272 +626,286 @@ $("#chartContainer").html("");
 
 //pour chaque capture creer un chart element 
 for (let i = 0; i < nombrecapture; i++) {
-	if (i==0) {
-		var chart = document.createElement('canvas');
-        chart.id = 'LM200';
-        chart.className = 'LM200';
-        document.getElementById('chartContainer').appendChild(chart);
-	}
-  
-	if (i==1) {
-	    var chart = document.createElement('canvas');
-	    chart.id = 'LM393';
-	    chart.className = 'LM393';
-	    document.getElementById('chartContainer').appendChild(chart);	
-	}
- 
-	if (i==2) {
-		var chart = document.createElement('canvas');
-	    chart.id = 'pT100';
-	    chart.className = 'pT100';
-	    document.getElementById('chartContainer').appendChild(chart);
-	}
-
-  
+if (i==0) {
+	var chart = document.createElement('canvas');
+	chart.id = 'LM200';
+	chart.className = 'LM200';
+	document.getElementById('chartContainer').appendChild(chart);
 }
 
+if (i==1) {
+	var chart = document.createElement('canvas');
+	chart.id = 'LM393';
+	chart.className = 'LM393';
+	document.getElementById('chartContainer').appendChild(chart);	
+}
 
-   var tab = [];
-            var html = "";
-            var x_tab = [];
-            var y_tab = [];
-          
+if (i==2) {
+	var chart = document.createElement('canvas');
+	chart.id = 'pT100';
+	chart.className = 'pT100';
+	document.getElementById('chartContainer').appendChild(chart);
+}
 
+}
+let filename = 'LM200.csv';
 
-   var ws = new WebSocket("ws://localhost:5002");
-            
-            
-            ws.onmessage = function (evt) {
-                tab = JSON.parse(evt.data)[0];
+// all of your code should be inside this command
+d3.csv(filename).then(function(loadedData) {
+	
+		let data =   [];
+		let labels = [];
+		
+		// use a for-loop to load the data from the
+		// file into our lists
+		for (let i=0; i<loadedData.length; i++) {
+			let x_tab =     loadedData[i].tention;
+			let y_tab = loadedData[i].temps;
+			labels.push(x_tab);
+	
+			// and mean temp to the data
+			data.push(y_tab); 
+			console.log(data)
+			
+}
+				// basic line chart settings
+			if($("#LM200").length > 0){
 
-                if(tab["LM200"] !== undefined) {
-	                x_tab.push(Number(tab["LM200"].temps));
-	                y_tab.push(Number(tab["LM200"].tention));
-
-	                /*$( ".myChart" ).each(function() {
-						   
-					});*/
-
-					if($("#LM200").length > 0){
-
-						var ctx = $("#LM200");
-				       var myChart = new Chart(ctx, {
-				        type: 'line',
-				                data: {
-				                    labels: x_tab,
-				                    datasets: [{
-				                        data: y_tab,
-				                      
-				                        borderColor: [
-				                            'rgba(255, 99, 132, 1)',
-				                            'rgba(54, 162, 235, 1)',
-				                            'rgba(255, 206, 86, 1)',
-				                            'rgba(75, 192, 192, 1)',
-				                            'rgba(153, 102, 255, 1)',
-				                            'rgba(255, 159, 64, 1)'
-				                        ],
-				                        borderWidth: 1
-				                    }]
-				                },
-				                options: {
-				                 
-				                    title: {
-				                        display: true,
-				                        text: '',
-				                        fontSize: 21,
-				                        padding: 20,
-				                        fontFamily: 'Calibri',
-				                        tooltips: {enabled: false},
-				                        hover: {mode: null},
-				                    },  
-				                    legend: {
-				                        display: false
-				                       
-				                       
-				                    },
-				                    type: 'line',
-				                    scales: {
-				                       
-				                    yAxes: [{
-				                            ticks: {
-				                                beginAtZero: true
-				                            },  
-				                            scaleLabel: {
-				                              display: true,
-				                              labelString: 'la concentration d’alcool dans la haleine'
-				                            }
-				                    }],
-				                    xAxes: [{
-				                            scaleLabel: {
-				                              display: true,
-				                              labelString: 'temps'
-				                            }
-				                    }],
-				                    }
-				                }
-				            });
+			var ctx = $("#LM200");
+			var myChart = new Chart(ctx, {
+			type: 'line',
+					data: {
+						labels: labels,
+						datasets: [{
+							data: data,
+						
+							borderColor: [
+								'rgba(255, 99, 132, 1)',
+								'rgba(54, 162, 235, 1)',
+								'rgba(255, 206, 86, 1)',
+								'rgba(75, 192, 192, 1)',
+								'rgba(153, 102, 255, 1)',
+								'rgba(255, 159, 64, 1)'
+							],
+							borderWidth: 1
+						}]
+					},
+					options: {
+					
+						title: {
+							display: true,
+							text: '',
+							fontSize: 21,
+							padding: 20,
+							fontFamily: 'Calibri',
+							tooltips: {enabled: false},
+							hover: {mode: null},
+						},  
+						legend: {
+							display: false
+							
+							
+						},
+						type: 'line',
+						scales: {
+							
+						yAxes: [{
+								ticks: {
+									beginAtZero: true
+								},  
+								scaleLabel: {
+								display: true,
+								labelString: 'la concentration d’alcool dans la haleine'
+								}
+						}],
+						xAxes: [{
+								scaleLabel: {
+								display: true,
+								labelString: 'temps'
+								}
+						}],
+						}
 					}
-                       
-
-                }
-
+				});
+			}
 
 
+			});
+			let filename2 = 'LM393.csv';
 
-                if(tab["LM393"] !== undefined) {
-	                x_tab.push(Number(tab["LM393"].temps));
-	                y_tab.push(Number(tab["LM393"].tention));
+// all of your code should be inside this command
+d3.csv(filename2).then(function(loadedData) {
+	
+		let data =   [];
+		let labels = [];
+		
+		// use a for-loop to load the data from the
+		// file into our lists
+		for (let i=0; i<loadedData.length; i++) {
+			let x_tab =     loadedData[i].tention;
+			let y_tab = loadedData[i].temps;
+			labels.push(x_tab);
+	
+			// and mean temp to the data
+			data.push(y_tab); 
+			console.log(data)
+			
+}
+				// basic line chart settings
+			if($("#LM393").length > 0){
 
-	                /*$( ".myChart" ).each(function() {
-						   
-					});*/
-
-					if($("#LM393").length > 0){
-
-						var ctx = $("#LM393");
-				       var myChart = new Chart(ctx, {
-				        type: 'bar',
-				                data: {
-				                    labels: x_tab,
-				                    datasets: [{
-				                        data: y_tab,
-				                      
-				                        borderColor: [
-				                            'rgba(255, 99, 132, 1)',
-				                            'rgba(54, 162, 235, 1)',
-				                            'rgba(255, 206, 86, 1)',
-				                            'rgba(75, 192, 192, 1)',
-				                            'rgba(153, 102, 255, 1)',
-				                            'rgba(255, 159, 64, 1)'
-				                        ],
-				                        borderWidth: 1
-				                    }]
-				                },
-				                options: {
-				                 
-				                    title: {
-				                        display: true,
-				                        text: '',
-				                        fontSize: 21,
-				                        padding: 20,
-				                        fontFamily: 'Calibri',
-				                        tooltips: {enabled: false},
-				                        hover: {mode: null},
-				                    },  
-				                    legend: {
-				                        display: false
-				                       
-				                       
-				                    },
-				                    type: 'line',
-				                    scales: {
-				                       
-				                    yAxes: [{
-				                            ticks: {
-				                                beginAtZero: true
-				                            },  
-				                            scaleLabel: {
-				                              display: true,
-				                              labelString: 'tention'
-				                            }
-				                    }],
-				                    xAxes: [{
-				                            scaleLabel: {
-				                              display: true,
-				                              labelString: 'temps'
-				                            }
-				                    }],
-				                    }
-				                }
-				            });
+			var ctx = $("#LM393");
+			var myChart = new Chart(ctx, {
+			type: 'line',
+					data: {
+						labels: labels,
+						datasets: [{
+							data: data,
+						
+							borderColor: [
+								'rgba(255, 99, 132, 1)',
+								'rgba(54, 162, 235, 1)',
+								'rgba(255, 206, 86, 1)',
+								'rgba(75, 192, 192, 1)',
+								'rgba(153, 102, 255, 1)',
+								'rgba(255, 159, 64, 1)'
+							],
+							borderWidth: 1
+						}]
+					},
+					options: {
+					
+						title: {
+							display: true,
+							text: '',
+							fontSize: 21,
+							padding: 20,
+							fontFamily: 'Calibri',
+							tooltips: {enabled: false},
+							hover: {mode: null},
+						},  
+						legend: {
+							display: false
+							
+							
+						},
+						type: 'line',
+						scales: {
+							
+						yAxes: [{
+								ticks: {
+									beginAtZero: true
+								},  
+								scaleLabel: {
+								display: true,
+								labelString: 'la concentration d’alcool dans la haleine'
+								}
+						}],
+						xAxes: [{
+								scaleLabel: {
+								display: true,
+								labelString: 'temps'
+								}
+						}],
+						}
 					}
-                       
-
-                }
-
+				});
+			}
 
 
-                if(tab["pT100"] !== undefined) {
-	                x_tab.push(Number(tab["pT100"].temps));
-	                y_tab.push(Number(tab["pT100"].tention));
+			});
+					let filename3 = 'pT100.csv';
 
-	                /*$( ".myChart" ).each(function() {
-						   
-					});*/
+// all of your code should be inside this command
+d3.csv(filename3).then(function(loadedData) {
+	
+		let data =   [];
+		let labels = [];
+		
+		// use a for-loop to load the data from the
+		// file into our lists
+		for (let i=0; i<loadedData.length; i++) {
+			let x_tab =     loadedData[i].tention;
+			let y_tab = loadedData[i].temps;
+			labels.push(x_tab);
+	
+			// and mean temp to the data
+			data.push(y_tab); 
+			console.log(data)
+			
+}
+				// basic line chart settings
+			if($("#pT100").length > 0){
 
-					if($("#pT100").length > 0){
-
-						var ctx = $("#pT100");
-				       var myChart = new Chart(ctx, {
-				        type: 'line',
-				                data: {
-				                    labels: x_tab,
-				                    datasets: [{
-				                        data: y_tab,
-				                      
-				                        borderColor: [
-				                            'rgba(255, 99, 132, 1)',
-				                            'rgba(54, 162, 235, 1)',
-				                            'rgba(255, 206, 86, 1)',
-				                            'rgba(75, 192, 192, 1)',
-				                            'rgba(153, 102, 255, 1)',
-				                            'rgba(255, 159, 64, 1)'
-				                        ],
-				                        borderWidth: 1
-				                    }]
-				                },
-				                options: {
-				                 
-				                    title: {
-				                        display: true,
-				                        text: '',
-				                        fontSize: 21,
-				                        padding: 20,
-				                        fontFamily: 'Calibri',
-				                        tooltips: {enabled: false},
-				                        hover: {mode: null},
-				                    },  
-				                    legend: {
-				                        display: false
-				                       
-				                       
-				                    },
-				                    type: 'line',
-				                    scales: {
-				                       
-				                    yAxes: [{
-				                            ticks: {
-				                                beginAtZero: true
-				                            },  
-				                            scaleLabel: {
-				                              display: true,
-				                              labelString: 'Frequence Cardiaque'
-				                            }
-				                    }],
-				                    xAxes: [{
-				                            scaleLabel: {
-				                              display: true,
-				                              labelString: 'temps'
-				                            }
-				                    }],
-				                    }
-				                }
-				            });
+			var ctx = $("#pT100");
+			var myChart = new Chart(ctx, {
+			type: 'line',
+					data: {
+						labels: labels,
+						datasets: [{
+							data: data,
+						
+							borderColor: [
+								'rgba(255, 99, 132, 1)',
+								'rgba(54, 162, 235, 1)',
+								'rgba(255, 206, 86, 1)',
+								'rgba(75, 192, 192, 1)',
+								'rgba(153, 102, 255, 1)',
+								'rgba(255, 159, 64, 1)'
+							],
+							borderWidth: 1
+						}]
+					},
+					options: {
+					
+						title: {
+							display: true,
+							text: '',
+							fontSize: 21,
+							padding: 20,
+							fontFamily: 'Calibri',
+							tooltips: {enabled: false},
+							hover: {mode: null},
+						},  
+						legend: {
+							display: false
+							
+							
+						},
+						type: 'line',
+						scales: {
+							
+						yAxes: [{
+								ticks: {
+									beginAtZero: true
+								},  
+								scaleLabel: {
+								display: true,
+								labelString: 'la concentration d’alcool dans la haleine'
+								}
+						}],
+						xAxes: [{
+								scaleLabel: {
+								display: true,
+								labelString: 'temps'
+								}
+						}],
+						}
 					}
-                       
+				});
+			}
 
-                }
-               
-                
 
-                
-                
-            };
+			});
+
+			
+
+
 
 
 }
-        
-        </script>
+
+</script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
         <script type="text/javascript" src="jquery.js"></script>
        
@@ -901,7 +951,13 @@ for (let i = 0; i < nombrecapture; i++) {
 var as = JSON.parse($('option:selected', this).attr('data-assoc'));
 	    $.each(as, function(index, value) {
 		  $('<div />', {
-		    'text': "Type de capteur : " + value.type + ", Vmax: " + value.valeurmax + ", Vmin: " + value.valeurmin + "  Référence de capteur : " + value.ref + ", frequence :" +value.frequence + "Branche :  "+value.branche + "   "  +"***************************"
+		    'text': "Type de capteur : " + value.type +"   "  +
+			 ",   Vmax: " + value.valeurmax +"   "  +
+			  ",   Vmin: " + value.valeurmin +"   "  +
+			   "            Référence de capteur : " + value.ref +"   "  +
+			    "           Fréquence de capteur :" +value.frequence +"   "  +
+				 "          Branche :  "+value.branche + "   "  +
+				 "*************"
 		  }).appendTo('.listassoc');
 		 
 		});
