@@ -223,7 +223,7 @@
 										<h3 class="modal-title">Modifier patient</h3>
 									</div>	
 									<div class="modal-body">
-										<div class="col-md-2"></div>
+										<div class="col-md-2">
 										<div class="col-md-8">
 											<div class="form-group">
 												<label>Nom</label>
@@ -264,6 +264,7 @@
 											</div>
 										</div>	
 									</div>	
+                                    </div>
 									<br style="clear:both;"/>
 									<div class="modal-footer">
 										<button class="btn btn-danger" data-dismiss="modal">Fermer</button>
@@ -279,8 +280,7 @@
 			
 			</table>
 		</div>
-	</div>
-					</div>
+	
 					
 <script src="js/jquery-3.2.1.min.js"></script>	
 <script src="js/bootstrap.js"></script>	
