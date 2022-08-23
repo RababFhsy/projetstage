@@ -113,6 +113,9 @@ if (isset($_POST['username'])){
   margin-right: auto;
   width: 50%;
 }
+body {
+  overflow: hidden; /* Hide scrollbars */
+}
 </style>
                 
               
