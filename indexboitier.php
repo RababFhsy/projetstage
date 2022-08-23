@@ -314,13 +314,13 @@
                         
                    </td>
 					</tr>
-						</tboby>	
+						</tbody>	
 					<div class="modal fade" id="update<?php echo $fetch['id']?>" aria-hidden="true" style="width: 100%">
 						<div class="modal-dialog">
 							<div class="modal-content">
 								<form method="post" >
 									<div class="modal-header">
-										<h3 class="modal-title">modifier boitier </h3>
+                                    <h3 class="modal-title">modifier boitier </h3>
 									</div>	
 									<div class="modal-body">
 										<div class="col-md-2"></div>
@@ -364,37 +364,73 @@
        </div>
   </div><br>
 								<div></div>		
-                                <label >Ses Capteurs  </label>
+                                <label ><h5>Ses Capteurs</h5></label>
+                                
 					
 									<?php
 						$id = $fetch['id'];
 						$sql5 = $conn->prepare("select * from `capteur` WHERE `id`  in (select `idc` from `association` where `idb`='$id')");
 			
 						$sql5->execute();
+                        $sql2="select * from `association` WHERE `idb`=$id";
+						$stmt = $conn->query($sql2);
+						foreach($stmt as $row){
+                        $idc=$row['branche'];
+                        $f=$row['frequence'];
+                        }
 						$t=0;
 					while($fetch5 = $sql5->fetch()){
+                        $t=$t+1;
+						$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+						
+						
 				
 				?>
 				
-                      
-                        <div class=" form-group container alert-info">
+                
+                        <div class=" form-group container alert-dark" style="width:300px;padding-right:60px">                        
   <div class="row">
     <div class="col">
+        <h6>type</h6>
     <?php echo $fetch5['type']?>
     </div>
     <div class="col">
-    <a href="deletecapteur1.php?id=<?php echo $fetch5['id'] ?>" class="text-dark">Supprimer</a>
+    <h6>photo</h6>
+    <img width="80px " src="<?php echo $fetch5['photo']?>"/>
+    </div>
+    <div class="col">
+        <h6>Branche</h6>
+    <?php echo $idc ?>
+    </div>
+    <div class="col">
+    <h6>Fréquence</h6>
+    <?php echo $f ?>
+    </div>                 
+    
+    <div class="col">
+    <a href="deletecapteur1.php?id=<?php echo $fetch5['id'] ?>" class="text-danger">Supprimer</a>
     </div>
   
   </div>
-</div>
+
+                    </div>
+                    
+                        
+                        <style>
+                            
+
+.col {
+width: 25%;
+}
+                        </style>
 
 
 <?php } ?>
 
 											
 											<div class="form-group">
-												<button class="btn btn-outline-warning form-control" type="submit" name="update">Modifier</button>
+												<button class="btn btn-primary form-control" type="submit" name="update">Modifier</button>
 											</div>
 										</div>	
 									</div>	
@@ -408,7 +444,7 @@
 						</div>
 					</div>
 
-					</tboby>	
+					</tbody>	
 				
 					
 <?php } ?>
