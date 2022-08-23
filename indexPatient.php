@@ -168,17 +168,7 @@
                 </div>
             </div>
 
-        </header><!-- /header -->
-        <!-- Header-->
-		<!-- <div class="breadcrumbs  bg-info">
-            <div class="col-sm-4  bg-info">
-                <div class="page-header float-left   bg-info ">
-                    <div class="page-title  bg-info text-">
-                        <h1>Gestion des Patients </h1>
-                    </div>
-                </div>
-            </div>          
-        </div> -->
+        </header>
 
 		
 
@@ -190,9 +180,7 @@
 		
 			
 		<div   style="margin : 30px;">
-		<!-- <div><a class="btn btn-warning btn-sm"  href="ajouterpatient.php">+Ajouter un patient </a>  <a class="btn btn-primary btn-sm" style="width : 200px" href="indexPatient.php">Actualiser la page</a> </div></br>
-                <div></div></br> -->
-                <!-- <div><a   class="btn btn-outline-primary"  href="ajouterpatient.php"> <i class="fa fa-plus" aria-hidden="true"></i> Ajouter patient  </a>  <a  class="btn btn-outline-primary" style="width : 150px" href="indexPatient.php"><i class="fa fa-refresh" aria-hidden="true"></i>   Actualiser </a> </div></br> -->
+		
                 <div><a  class="btn btn-success"  href="ajouterpatient.php"><i class="fa fa-plus" aria-hidden="true"></i>  compte patient </a>  <a  class="btn btn-primary" style="width : 150px" href="indexPatient.php"><i class="fa fa-refresh" aria-hidden="true"></i>   Actualiser </a> </div></br>
                 
         
@@ -257,7 +245,7 @@
 				                               <select class="form-control" name="nommedecin">
                                                <option > 
 							                <?php echo $fetch1['fullname']  ?> 
-							                </option> -->
+							                </option>
 																	<?php
 						                 require 'conn.php';
 						                 $sql1 = $conn->prepare("SELECT distinct fullname FROM `medecin`");
