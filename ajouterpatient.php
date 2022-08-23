@@ -168,17 +168,7 @@
                 </div>
             </div>
 
-        </header><!-- /header -->
-        <!-- Header-->
-		<!-- <div class="breadcrumbs  bg-info">
-            <div class="col-sm-4  bg-info">
-                <div class="page-header float-left   bg-info ">
-                    <div class="page-title  bg-info text-">
-                        <h1>Gestion des Patients </h1>
-                    </div>
-                </div>
-            </div>          
-        </div> -->
+        </header>
 
 		<div class="patient-form">
 		
