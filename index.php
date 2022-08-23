@@ -123,7 +123,7 @@ body {
                            
                             
 <div class="container">
-<label style="padding: bottom 200px;"><b>  Nom</b></label>
+<label style="padding: bottom 200px;"><b>  Nom d'utilisateur</b></label>
                             <input type="text" class="form-control" name="username" placeholder="nom">
                             
                             <br>
