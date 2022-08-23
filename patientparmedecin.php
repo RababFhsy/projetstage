@@ -238,7 +238,7 @@
 
 
 				
-	<td><input type="submit" onclick="$('.typebassoc').change();" class="btn btn-outline-dark" data-toggle="modal" data-target="#update<?php echo $fetch['id']?>"  value ="Affecter un Boitier ">   <a class="btn btn-outline-danger" href="deletepatient.php?id=<?php echo $fetch['id']?>">Supprimer**</a></td>
+	<td><input type="submit" onclick="$('.typebassoc').change();" class="btn btn-outline-dark" data-toggle="modal" data-target="#update<?php echo $fetch['id']?>"  value ="Affecter un Boitier ">   <a class="btn btn-outline-danger" href="deletePatient.php?id=<?php echo $fetch['id']?>">Supprimer**</a></td>
 
 						
 					  
