@@ -3,7 +3,7 @@
 	session_start();
 	// Vérifiez si l'utilisateur est connecté, sinon redirigez-le vers la page de connexion
 	if(!isset($_SESSION["username"])){
-		header("Location: index.php");
+		header("Location: login.php");
 	
         exit(); 
 	}
@@ -112,10 +112,10 @@
                     </li>
   
                     <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-bars"></i> Gestion des Secrétaires </a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-bars"></i> Gestion des Secretaires </a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-id-card-o"></i><a href="add_secretaires.php">Créer un compte Secrétaire</a></li>
-                            <li><i class="fa fa-table"></i><a href="add_secretaires1.php">Liste des Secrétaires</a></li>
+                            <li><i class="fa fa-id-card-o"></i><a href="add_secretaires.php">Créer un compte Secretaire</a></li>
+                            <li><i class="fa fa-table"></i><a href="add_secretaires1.php">Liste des Secretaires</a></li>
                          
                         </ul>
                     </li>
@@ -212,10 +212,7 @@
             
                 <!-- <div><a class="btn btn-warning btn-sm" style="width : 150px" href="addboitier.php">+ Créer un  Boitier  </a>  <a class="btn btn-primary btn-sm" style="width : 150px" href="indexboitier.php">Actualiser la page</a> </div></br>
                 <div></div></br> -->
-                <div><a  class="btn btn-outline-success"  href="addboitier.php"> <i class="fa fa-plus" aria-hidden="true"></i> Ajouter Boitier  </a> 
-                 <!-- <a  class="btn btn-outline-primary" style="width : 150px" href="indexboitier.php"><i class="fa fa-refresh" aria-hidden="true"></i>   Actualiser </a> 
-                <!-- </div></br> --> 
-       </div></br>
+                <div><a  class="btn btn-outline-success"  href="addboitier.php"> <i class="fa fa-plus" aria-hidden="true"></i> Ajouter Boitier  </a>  <a  class="btn btn-outline-primary" style="width : 150px" href="indexboitier.php"><i class="fa fa-refresh" aria-hidden="true"></i>   Actualiser </a> </div></br>
         
                 </div>
                 <div class="container">
@@ -254,88 +251,61 @@
 			
 					
 						<div class="modal fade" id="up<?php echo $fetch['id']?>"  aria-hidden="true">
-						<div class="modal-dialog" style="width: 100px;">
-							<div class="modal-content" style="width: 400px;">
-								<div  class="text-dark alert alert-light "  style="text-align:center;width: 400px;">
-								<label > SES CAPTEURS</label></div>
+						<div class="modal-dialog" style="width: 1000px;">
+							<div class="modal-content" style="width: 800px;">
+								<div  class="text-dark alert alert-light "  style="text-align:center;width: 800px;">
+								<label ><b> Ses Capteurs </b></label></div>
 								<table class="table table-hover" style= " width:400px;">
-									<!-- <thead class="table-dark" style="width: 400px;"> -->
-									<!-- <th>Numero</th>
+									<thead class="table-light" style="width: 400px;">
+									<th>Numero</th>
 									
 						<th>Type</th>
 						<th>Photo</th>
 						<th>Ref</th>
 						<th>Valeurmax</th>
 						<th>Valeurmin</th>
-						<th>Branche</th> -->
+						<th>Branche</th>
 
-                       
-									<!-- </thead> -->
+                        <th>Frequence</th>
+									</thead>
 									<tbody>
 									<?php
 						$id = $fetch['id'];
 						$sql1 = $conn->prepare("select * from `capteur` WHERE `id`  in (select `idc` from `association` where `idb`='$id')");
 			
 						$sql1->execute();
+                        $sql2="select * from `association` WHERE `idb`=$id";
+						$stmt = $conn->query($sql2);
+						while($row = $stmt->fetch(PDO::FETCH_ASSOC)){;
+						$idc=$row['branche'];
+                        $f=$row['frequence'];
+                    // print_r($f);
+                    // print_r($idc);
+                    
+                    
 						$t=0;
-                        $sql2= "select  DISTINCT frequence,branche from `association` WHERE `idb`=$id ";
-                       
-                        $stmt12=$conn->query($sql2);
-                        $row12= $stmt12->fetchAll(PDO::FETCH_ASSOC);
-				if($row12){
-						foreach($row12 as $array12){
-                            $ma=$array12['branche'];
-                            $ba=$array12['frequence'];
-
-                           
-                        
 					while($fetch1 = $sql1->fetch()){
 						$t=$t+1;
 						$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-						
-                            
-                        
-                        
-                    ?><thead  class="table-danger" >
-                    <th>NUMERO</th></thead>
-                    </thead>
-						<tr><td><?php echo $t?></td></tr>
-                        <thead  class="table-danger" >
-                         <th>Type</th>	
-                    </thead>
-						<tr><td><?php echo $fetch1['type']?></td></tr>
-                        <thead  class="table-danger" >
-                        <th>Photo</th>
-                        </thead>
-						<tr><td> <img width="150px " src="<?php echo $fetch1['photo']?>"/></td></tr>
-                        <thead  class="table-danger" >
-                        <th>REFERENCE</th>
-                        </thead>
-						<tr><td><?php echo $fetch1['ref']?></td></tr>
-                        <thead  class="table-danger" >
-                        <th>VALEURMAX</th>
-                        </thead>
-						<tr><td><?php echo $fetch1['valeurmax']?></td></tr>
-                        <thead  class="table-danger" >
-                        <th>VALEURMIN</th>
-                        </thead>
-						<tr><td><?php echo $fetch1['valeurmin']?></td></tr>
-                        <thead  class="table-danger" >
-                        <th>Branche</th>
-                        </thead>
-                            <td><?php echo $ma ?></td>
-                            <thead  class="table-danger" >
-                            <th>Frequence</th>
-                    </thead>
-                             <td><?php echo $ba ?></td>
-					   
-                       
-                       
-                    </tbody><?php } }}?></table>
+                        $a=$fetch1['type'];
+                          ?>
+                         
+                    
+                    
+                    <tr>
+						<td><?php echo $t?></td>	
+						<td><?php echo $a?></td>
+						<td> <img width="150px " src="<?php echo $fetch1['photo']?>"/></td>
+						<td><?php echo $fetch1['ref']?></td>
+						<td><?php echo $fetch1['valeurmax']?></td>
+						<td><?php echo $fetch1['valeurmin']?></td>
+                        <td><?php echo $idc?></td>
+                        <td><?php echo $f?></td>
+					    </tbody></tr><?php }} ?>
+                    </table>
 				
 							<div class="modal-footer">
-										<button class="btn btn-danger" data-dismiss="modal">Fermer</button>
+										<button class="btn btn-danger" data-dismiss="modal">Close</button>
 
 									</div>		
 						</div>
@@ -394,74 +364,37 @@
        </div>
   </div><br>
 								<div></div>		
-                                <label ><h5>Ses Capteurs</h5></label>
-                                
+                                <label >Ses Capteurs  </label>
 					
 									<?php
 						$id = $fetch['id'];
 						$sql5 = $conn->prepare("select * from `capteur` WHERE `id`  in (select `idc` from `association` where `idb`='$id')");
 			
 						$sql5->execute();
-                        $sql2="select * from `association` WHERE `idb`=$id";
-						$stmt = $conn->query($sql2);
-						foreach($stmt as $row){
-                        $idc=$row['branche'];
-                        $f=$row['frequence'];
-                        
 						$t=0;
 					while($fetch5 = $sql5->fetch()){
-                        $t=$t+1;
-						$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-						
-						
 				
 				?>
 				
-                
-                        <div class=" form-group container alert-dark" style="width:300px;padding-right:60px">                        
+                      
+                        <div class=" form-group container alert-info">
   <div class="row">
     <div class="col">
-        <h6>type</h6>
     <?php echo $fetch5['type']?>
     </div>
     <div class="col">
-    <h6>photo</h6>
-    <img width="80px " src="<?php echo $fetch5['photo']?>"/>
-    </div>
-    <div class="col">
-        <h6>Branche</h6>
-    <?php echo $idc ?>
-    </div>
-    <div class="col">
-    <h6>Frequence</h6>
-    <?php echo $f ?>
-    </div> 
-                                   
-    
-    <div class="col">
-    <a href="deletecapteur1.php?id=<?php echo $fetch5['id'] ?>" class="text-danger">Supprimer</a>
+    <a href="deletecapteur1.php?id=<?php echo $fetch5['id'] ?>" class="text-dark">Supprimer</a>
     </div>
   
   </div>
-
-                    </div>
-                    
-                        
-                        <style>
-                            
-
-.col {
-width: 25%;
-}
-                        </style>
+</div>
 
 
-<?php } }?>
+<?php } ?>
 
 											
 											<div class="form-group">
-												<button class="btn btn-primary form-control" type="submit" name="update">Modifier</button>
+												<button class="btn btn-outline-warning form-control" type="submit" name="update">Modifier</button>
 											</div>
 										</div>	
 									</div>	
