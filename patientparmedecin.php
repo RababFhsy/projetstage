@@ -238,7 +238,7 @@
 
 
 				
-	<td><input type="submit" onclick="$('.typebassoc').change();" class="btn btn-outline-dark" data-toggle="modal" data-target="#update<?php echo $fetch['id']?>"  value ="Affecter un Boitier ">   <a class="btn btn-outline-danger" href="deletepatient.php?id=<?php echo $fetch['id']?>">Supprimer</a></td>
+	<td><input type="submit" onclick="$('.typebassoc').change();" class="btn btn-outline-dark" data-toggle="modal" data-target="#update<?php echo $fetch['id']?>"  value ="Affecter un Boitier ">   <a class="btn btn-outline-danger" href="deletePatient.php?id=<?php echo $fetch['id']?>">Supprimer**</a></td>
 
 						
 					  
@@ -340,7 +340,7 @@
 
 
 				
-	<td><input type="submit" class="btn btn-outline-dark" data-toggle="modal" data-target="#update<?php echo $fetch['id']?>" onclick="$('.typebassoc').change();"  value ="Reaffecter un Boitier ">  <a class="btn btn-outline-danger" href="deletepatient.php?id=<?php echo $fetch['id']?>">Supprimer</a></td>
+	<td><input type="submit" class="btn btn-outline-dark" data-toggle="modal" data-target="#update<?php echo $fetch['id']?>" onclick="$('.typebassoc').change();"  value ="Reaffecter un Boitier ">  <a class="btn btn-outline-danger" href="deletePatient.php?id=<?php echo $fetch['id']?>">Supprimer</a></td>
 
     <td>
 						<button  class="btn btn-outline-primary" data-toggle="modal"  data-target="#up<?php echo $fetch['id']?>">Voir détails de boitier </button>
@@ -957,7 +957,7 @@ var as = JSON.parse($('option:selected', this).attr('data-assoc'));
 			   "            Référence de capteur : " + value.ref +"   "  +
 			    "           Fréquence de capteur :" +value.frequence +"   "  +
 				 "          Branche :  "+value.branche + "   "  +
-				 "*****"
+				 "*************"
 		  }).appendTo('.listassoc');
 		 
 		});
