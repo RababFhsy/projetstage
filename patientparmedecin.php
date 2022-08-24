@@ -53,6 +53,7 @@
     <link rel="stylesheet" href="vendors/flag-icon-css/css/flag-icon.min.css">
     <link rel="stylesheet" href="vendors/selectFX/css/cs-skin-elastic.css">
     <link rel="stylesheet" href="vendors/jqvmap/dist/jqvmap.min.css">
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 
     <link rel="stylesheet" href="assets/css/style.css">
@@ -96,6 +97,9 @@
     <!-- Left Panel -->
 
     <!-- Right Panel -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+
 
     <div id="right-panel" class="right-panel">
 
@@ -140,11 +144,11 @@
                         </a>
 
                         <div class="user-menu dropdown-menu">
-                            <a class="nav-link" href="profile.php"><i class="fa fa-user"></i> Mon Profile</a>
+                            <a class="nav-link" href="profile.php"><i class="fa fa-user"></i> My Profile</a>
 
                           
 
-                            <a class="nav-link" href="logout.php"><i class="fa fa-power-off"></i> déconnexion</a>
+                            <a class="nav-link" href="logout.php"><i class="fa fa-power-off"></i> Logout</a>
                         </div>
                     </div>
 
@@ -169,7 +173,40 @@
                 </div>
             </div>
 
-        </header>
+        </header><!-- /header -->
+        <!-- Header-->
+
+        <!-- <div class="breadcrumbs">
+            <div class="col-sm-4">
+                <div class="page-header float-left">
+                    <div class="page-title">
+                        <h1>Gestion des Patients </h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="page-header float-right">
+                    <div class="page-title">
+                        <ol class="breadcrumb text-right">
+                          
+                    </div>
+                </div>
+            </div>
+        </div> -->
+
+        <!-- <div class="content mt-3">
+
+            <div class="col-sm-12">
+
+            </div>
+
+		<div class="col-md-6" >
+		
+
+		</div> -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+
 			<table class="table table-hover" style="margin-left : 15px; width: 1000px;">
 				<thead  class="table-dark">
 					<tr>
@@ -208,15 +245,12 @@
 
 
 				
-	<td><input type="submit" onclick="$('.typebassoc').change();" class="btn btn-outline-dark" data-toggle="modal" data-target="#update<?php echo $fetch['id']?>"  value ="Affecter un Boitier ">   <a class="btn btn-outline-danger" href="deletePatient.php?id=<?php echo $fetch['id']?>">Supprimer**</a></td>
+	<td><input type="submit" onclick="$('.typebassoc').change();" class="btn btn-outline-dark" data-toggle="modal" data-target="#update<?php echo $fetch['id']?>"  value ="Affecter un Boitier ">   <input type="submit"  class="btn btn-outline-danger" value ="Retirer Boitier"></td>
 
-						
-					  
-
-	
 				
 
 				</tr>
+				
 					
 					<div class="modal fade lg" id="update<?php echo $fetch['id']?>" aria-hidden="true">
 						<div class="modal-dialog">
@@ -305,155 +339,183 @@
                         <td><?php echo $fetch['dateDeNaissance'] ?></td>	
 					
 								
-
+	
 
 
 
 				
-	<td><input type="submit" class="btn btn-outline-dark" data-toggle="modal" data-target="#update<?php echo $fetch['id']?>" onclick="$('.typebassoc').change();"  value ="Reaffecter un Boitier ">  <a class="btn btn-outline-danger" href="deletePatient.php?id=<?php echo $fetch['id']?>">Supprimer</a></td>
+	<td><input type="submit" class="btn btn-outline-dark" style="width:160px;text-align: center; " data-toggle="modal" data-target="#update<?php echo $fetch['id']?>" onclick="$('.typebassoc').change();"  value ="Reaffecter un Boitier ">  <input type="submit" class="btn btn-outline-danger deletebtn" data-toggle="modal" data-target="#de<?php echo $fetch['id']?>" value ="Retirer Boitier"></td>
 
     <td>
-						<button  class="btn btn-outline-primary" data-toggle="modal"  data-target="#up<?php echo $fetch['id']?>">Voir détails de boitier </button>
+	<button  class="btn btn-outline-primary" data-toggle="modal"  data-target="#up<?php echo $fetch['id']?>">Voir détails de boitier </button>
 			
 					
-						<div class="modal fade" id="up<?php echo $fetch['id']?>"  style="width=1000px" aria-hidden="true">
-						<div class="modal-dialog modal-lg">
-							
-							<div class="modal-content modal-lg" >
-								<div  class="text-dark alert alert-light ">
-								<label  ><Strong> INFORMATION BOITIER </Strong></label></div>
-								<table id="example" class="table table-hover">
-									<tbody>
-									<?php
-						$id = $fetch['id'];
-						$sql1 = $conn->prepare("select * from `patientboitier` WHERE `idp`  in (select `id` from `patient` where `id`='$id')");
-						$sql1->execute();
-                        $sql3 = $conn->prepare("select * from `boitier` WHERE `id`  in (select `idb` from `patientboitier` where `idp`='$id')");
-						$sql3->execute();
-						$fetch3=$sql3->execute();
-						
-						
-						
-						  
-					while($fetch1 = $sql1->fetch()  ){
-                        $fetch3=$sql3->fetch();
-						
-						        
-			
-			
-            $sql30="select count(idc) as id  from `association` where idb in (select id from `boitier` WHERE `id`  in (select `idb` from `patientboitier` where `idp`='$id'))";
-            $stmt1 = $conn->query($sql30);
-            $row1 = $stmt1->fetch(PDO::FETCH_ASSOC);
-            $idb=$row1['id'];
-			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			
-			 
-			$ta=$fetch3['id'];
-			$sql50 ="select c.type,a.frequence,a.branche,c.photo from capteur c,association a where
-			c.id=a.idc and idb='$ta'";
-			?>
-			
-			<thead  class="table-light" >
-			
-				<td><b>Référence boitier</b> : 
-				     <span class="weak"><?php echo $fetch3['ref']?></td>
+			<div class="modal fade" id="up<?php echo $fetch['id']?>"  style="width=1000px" aria-hidden="true">
+			<div class="modal-dialog modal-lg">
 				
-				</thead>
-					
-				<thead  class="table-light" >
-				
-				<td><b>Date</b>        <span>      :  </span>             <?php echo $fetch1['datedebut']?></td>
-				</thead>
-				
-				<thead  class="table-light" >
-				<td><b>Nombre capteurs</b> :
-				 <?php echo $idb ?></td>
-				</thead>
-				
-				
-			<td><b>Liste des capteurs </b></td>
-			<div class="row">
-				<table>
-					<thead>
-					<th>Type</th>
-					<th>Branche</th>
-					<th>Fréquence</th>
-					<th>Photo</th>
-					</thead>
-					<tbody>
-					
-			<?php
-						
-			$stmt11 = $conn->query($sql50);
-            $row11 = $stmt11->fetchAll(PDO::FETCH_ASSOC);
-			if($row11){
-				$t=0;
-				foreach($row11 as $array11){
-					$t=$t+1;
-            $idca=$array11['type'];
-			$idcap=$array11['photo'];
-			$idco=$array11['frequence'];
-			$idci=$array11['branche'];
-			
-			?>
-			<tr>
-			<td><?php echo $idca?></td>
-			<td><?php echo $idci?></td>
-			<td><?php echo $idco?></td>
-			<td><img width="70px " src="<?php echo $idcap?>"/></td></tr>
-					</tbody>
-				
-				
-				
-						
-				
-						
-			
-			
-			
-			
-			
-			
-			
-			
-			
-				
-			
-				
-				
-			
-					
+				<div class="modal-content modal-lg" >
+					<div  class="text-dark alert alert-light ">
+					<label  ><Strong> INFORMATION BOITIER </Strong></label></div>
+					<table id="example" class="table table-hover">
+						<tbody>
 						<?php
-		}}
-		
+			$id = $fetch['id'];
+			$sql1 = $conn->prepare("select * from `patientboitier` WHERE `idp`  in (select `id` from `patient` where `id`='$id')");
+			$sql1->execute();
+			$sql3 = $conn->prepare("select * from `boitier` WHERE `id`  in (select `idb` from `patientboitier` where `idp`='$id')");
+			$sql3->execute();
+			$fetch3=$sql3->execute();
 			
 			
 			
+			  
+		while($fetch1 = $sql1->fetch()  ){
+			$fetch3=$sql3->fetch();
 			
-			
-			
-			
-			
-
 					
-				?>
-				
-			
-							
-         
-</table>
-				
-							<div class="modal-footer">
-										<button class="btn btn-danger" data-dismiss="modal">Fermer</button>
 
-									</div>		
-						</div>
-						</div>
-					</div>
+
+$sql30="select count(idc) as id  from `association` where idb in (select id from `boitier` WHERE `id`  in (select `idb` from `patientboitier` where `idp`='$id'))";
+$stmt1 = $conn->query($sql30);
+$row1 = $stmt1->fetch(PDO::FETCH_ASSOC);
+$idb=$row1['id'];
+$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+ 
+$ta=$fetch3['id'];
+$sql50 ="select c.type,a.frequence,a.branche,c.photo from capteur c,association a where
+c.id=a.idc and idb='$ta'";
+?>
+
+<thead  class="table-light" >
+
+	<td><b>Référence boitier</b> : 
+		 <span class="weak"><?php echo $fetch3['ref']?></td>
+	
+	</thead>
+		
+	<thead  class="table-light" >
+	
+	<td><b>Date</b>        <span>      :  </span>             <?php echo $fetch1['datedebut']?></td>
+	</thead>
+	
+	<thead  class="table-light" >
+	<td><b>Nombre capteurs</b> :
+	 <?php echo $idb ?></td>
+	</thead>
+	
+	
+<td><b>Liste des capteurs </b></td>
+<div class="row">
+	<table>
+		<thead>
+		<th>Type</th>
+		<th>Branche</th>
+		<th>Fréquence</th>
+		<th>Photo</th>
+		</thead>
+		<tbody>
+		
+<?php
+			
+$stmt11 = $conn->query($sql50);
+$row11 = $stmt11->fetchAll(PDO::FETCH_ASSOC);
+if($row11){
+	$t=0;
+	foreach($row11 as $array11){
+		$t=$t+1;
+$idca=$array11['type'];
+$idcap=$array11['photo'];
+$idco=$array11['frequence'];
+$idci=$array11['branche'];
+
+?>
+<tr>
+<td><?php echo $idca?></td>
+<td><?php echo $idci?></td>
+<td><?php echo $idco?></td>
+<td><img width="70px " src="<?php echo $idcap?>"/></td></tr>
+		</tbody>
+	
+	
+	
+			
+	
+			
+
+
+
+
+
+
+
+
+
+	
+
+	
+	
+
+		
+			<?php
+}}
+
+
+
+
+
+
+
+
+
+
+		
+	?>
+	
+
+				
+
+</table>
+	
+				<div class="modal-footer">
+							<button class="btn btn-danger" data-dismiss="modal">Fermer</button>
+
+						</div>		
+			</div>
+			</div>
+		</div>
                         
                    </td>
                   
-          
+          <!-- DELETE POP UP FORM (Bootstrap MODAL) -->
+<div class="modal fade" id="de<?php echo $fetch['id']?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"> Retirer boitier patient </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <form action="deleteBoitier.php" method="POST">
+
+                    <div class="modal-body">
+
+                        <input type="hidden" value="<?php echo $fetch['id']?>" name="id">
+
+                        <h4>Voulez vous retirer la boite de façon définitve?</h4>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"> Non </button>
+                        <button type="submit" name="deletedata" class="btn btn-primary">Oui! Supprimer </button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
 
                     <td>
 						<button  class="btn btn-outline-primary" data-toggle="modal" onclick="fat('<?php echo $idb ?>')" data-target="#p">  Voir ses Données
@@ -467,6 +529,11 @@
                    
                   
                     </tbody>
+
+					
+	
+
+
 					<div class="modal fade" id="update<?php echo $fetch['id']?>" aria-hidden="true">
 						<div class="modal-dialog">
 							<div class="modal-content">
@@ -552,6 +619,7 @@
                             
 	
 	</div>
+	
 
 	<div class="modal fade" id="p"  style="height=50% " >
             
@@ -583,6 +651,26 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 <script type="text/javascript" src="jquery.js"></script>
 <script src="https://d3js.org/d3.v7.min.js"></script>
+<script>
+        $(document).ready(function () {
+
+            $('.deletebtn').on('click', function () {
+
+                $('#deletemodal').modal('show');
+
+                $tr = $(this).closest('tr');
+
+                var data = $tr.children("td").map(function () {
+                    return $(this).text();
+                }).get();
+
+                console.log(data);
+
+                $('#delete_id').val(data[0]);
+
+            });
+        });
+    </script>
 <script>
 
 $(document).ready(function() {
@@ -927,7 +1015,7 @@ var as = JSON.parse($('option:selected', this).attr('data-assoc'));
 			   "            Référence de capteur : " + value.ref +"   "  +
 			    "           Fréquence de capteur :" +value.frequence +"   "  +
 				 "          Branche :  "+value.branche + "   "  +
-				 "*************"
+				 "*****"
 		  }).appendTo('.listassoc');
 		 
 		});
