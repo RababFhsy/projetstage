@@ -213,7 +213,7 @@
 						<th>Nom de Patient</th>
                         <th>Date de naissance </th>
 						<th> Action</th>
-                        <th>Information sur le boitier</th>
+                        <th>Information boitier</th>
                         <th>Dashboard</th>
 
 					
