@@ -140,11 +140,11 @@
                         </a>
 
                         <div class="user-menu dropdown-menu">
-                            <a class="nav-link" href="profile.php"><i class="fa fa-user"></i> My Profile</a>
+                            <a class="nav-link" href="profile.php"><i class="fa fa-user"></i> Mon Profile</a>
 
                           
 
-                            <a class="nav-link" href="logout.php"><i class="fa fa-power-off"></i> Logout</a>
+                            <a class="nav-link" href="logout.php"><i class="fa fa-power-off"></i> déconnexion</a>
                         </div>
                     </div>
 
@@ -169,37 +169,7 @@
                 </div>
             </div>
 
-        </header><!-- /header -->
-        <!-- Header-->
-
-        <!-- <div class="breadcrumbs">
-            <div class="col-sm-4">
-                <div class="page-header float-left">
-                    <div class="page-title">
-                        <h1>Gestion des Patients </h1>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-8">
-                <div class="page-header float-right">
-                    <div class="page-title">
-                        <ol class="breadcrumb text-right">
-                          
-                    </div>
-                </div>
-            </div>
-        </div> -->
-
-        <!-- <div class="content mt-3">
-
-            <div class="col-sm-12">
-
-            </div>
-
-		<div class="col-md-6" >
-		
-
-		</div> -->
+        </header>
 			<table class="table table-hover" style="margin-left : 15px; width: 1000px;">
 				<thead  class="table-dark">
 					<tr>
