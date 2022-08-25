@@ -268,6 +268,7 @@
 											
 											<div class="form-group">
                                             <input type="hidden" value="<?php echo $fetch['id']?>" name="id"/>
+											<input type="hidden" value="<?php echo $b?>" name="idp"/>
 											
 
                                             <label> Référence  Boitier</label> 
