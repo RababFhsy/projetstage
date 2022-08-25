@@ -256,7 +256,7 @@
 						<div class="modal-dialog">
 							<div class="modal-content">
 								
-								<form method="POST" action="boitierpatient.php">
+								<form  action="boitierpatient.php" method="POST">
 									<div class="modal-header">
 										<h3 class="modal-title">Affecter Boitier </h3>
 									</div>	
