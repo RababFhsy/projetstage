@@ -277,7 +277,7 @@
 											<option>Choisir référence</option>
 																	<?php
 						require 'conn.php';
-						$sql21= $conn->prepare("SELECT * FROM `boitier`");
+						$sql21= $conn->prepare("SELECT * FROM boitier");
 						$sql21->execute();
 						while($fetch21= $sql21->fetch()){
 
@@ -294,8 +294,8 @@
 							
 					?>
 							<option   data-assoc=<?php echo "'".json_encode($assoc)."'"; ?> value="<?php echo $fetch21['ref'] ?> ">
-							<?php echo $fetch21['ref']  ?> 
-							</option>
+							<?php echo $fetch21['ref']  ?></option> 
+							
 							<?php } ?>
 						    </select>
 											</div>
@@ -305,15 +305,17 @@
 				</div>
 			
 											<div class="form-group">
-												<button class="btn btn-outline-dark form-control" type="submit" name="affecter">Affecter</button>
+												<button class="btn btn-outline-dark" type="submit" name="affecter">Affecter</button>
 											</div>
 										</div>	
-									</div>	
-									<br style="clear:both;"/>
+									</div>
+									<div>
+										</form>	
+									<br>
 									<div class="modal-footer">
 										<button class="btn btn-danger" data-dismiss="modal">Close</button>
 									</div>
-								</form>
+								
 					
 						
 								
