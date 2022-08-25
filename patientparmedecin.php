@@ -602,7 +602,7 @@ $idci=$array11['branche'];
 									<div class="modal-footer">
 										<button class="btn btn-danger" data-dismiss="modal">Fermer</button>
 									</div>
-								</form>
+								
 					
 						
 								
