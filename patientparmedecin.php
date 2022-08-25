@@ -252,7 +252,7 @@
 				</tr>
 				
 					
-					<div class="modal fade lg" id="update<?php echo $fetch['id']?>" aria-hidden="true">
+					<div class="modal fade" id="update<?php echo $fetch['id']?>" aria-hidden="true">
 						<div class="modal-dialog">
 							<div class="modal-content">
 								
