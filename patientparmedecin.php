@@ -245,7 +245,8 @@
 
 
 				
-	<td><input type="submit" onclick="$('.typebassoc').change();" class="btn btn-outline-dark" data-toggle="modal" data-target="#update<?php echo $fetch['id']?>"  value ="Affecter un Boitier ">   <input type="submit"  class="btn btn-outline-danger" value ="Retirer Boitier"></td>
+	<td><input type="submit" onclick="$('.typebassoc').change();" class="btn btn-outline-dark" data-toggle="modal" data-target="#update<?php echo $fetch['id']?>"  value ="Affecter un Boitier "></td> 
+	 <!-- <input type="submit"  class="btn btn-outline-danger" value ="Retirer Boitier"></td> -->
 
 				
 
@@ -491,7 +492,7 @@ $idci=$array11['branche'];
                    </td>
                   
           <!-- DELETE POP UP FORM (Bootstrap MODAL) -->
-<div class="modal fade" id="de<?php echo $fetch['id']?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<!-- <div class="modal fade" id="de<?php echo $fetch['id']?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -518,7 +519,7 @@ $idci=$array11['branche'];
 
             </div>
         </div>
-    </div>
+    </div> -->
 
                     <td>
 						<button  class="btn btn-outline-primary" data-toggle="modal" onclick="fat('<?php echo $idb ?>')" data-target="#p">  Voir ses Données
