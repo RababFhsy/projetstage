@@ -202,8 +202,7 @@
         
                 </div> -->
                 <div><a  class="btn btn-outline-success"  href="createcapteur.php"> <i class="fa fa-plus" aria-hidden="true"></i> Créer un  Capteur </a>  
-                <!-- <a  class="btn btn-outline-primary" style="width : 150px" href="indexcapteur.php"><i class="fa fa-refresh" aria-hidden="true"></i>   Actualiser </a> 
-            <!-- </div></br> -->
+               
             </div></br>
 
                 <div class="container">

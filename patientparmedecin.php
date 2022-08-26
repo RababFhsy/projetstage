@@ -245,7 +245,7 @@
 
 
 				
-	<td><input type="submit" onclick="$('.typebassoc').change();" class="btn btn-outline-dark" data-toggle="modal" data-target="#update<?php echo $fetch['id']?>"  value ="Affecter un Boitier ">   <input type="submit"  class="btn btn-outline-danger" value ="Retirer Boitier"></td>
+	<td><input type="submit" onclick="$('.typebassoc').change();" class="btn btn-outline-dark" data-toggle="modal" data-target="#update<?php echo $fetch['id']?>"  value ="Affecter un Boitier "></td>
 
 				
 
