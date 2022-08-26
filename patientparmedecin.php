@@ -245,14 +245,14 @@
 
 
 				
-	<td><input type="submit" onclick="$('.typebassoc').change();" class="btn btn-outline-dark" data-toggle="modal" data-target="#update<?php echo $fetch['id']?>"  value ="Affecter un Boitier "></td>
+	<td><input type="submit" onclick="$('.typebassoc').change();" class="btn btn-outline-dark" data-toggle="modal" data-target="#upda<?php echo $fetch['id']?>"  value ="Affecter un Boitier "></td>
 
 				
 
 				</tr>
 				
 					
-					<div class="modal fade" id="update<?php echo $fetch['id']?>" aria-hidden="true">
+					<div class="modal fade" id="upda<?php echo $fetch['id']?>" aria-hidden="true">
 						<div class="modal-dialog">
 							<div class="modal-content">
 								
