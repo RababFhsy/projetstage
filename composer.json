@@ -11,5 +11,5 @@
             "email": "fhsyrabab07@gmail.com"
         }
     ],
-    "require": {"php": "^8.1.4"}
+    "require": {"php": "^7.4.29"}
 }
