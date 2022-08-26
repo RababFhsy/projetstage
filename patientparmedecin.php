@@ -306,7 +306,7 @@
 				</div>
 			
 											<div class="form-group">
-												<button class="btn btn-outline-dark" type="submit" name="affecter">Affecter</button>
+												<input type="submit" class="btn btn-outline-dark" type="submit" name="affecter" value="Affecter">
 											</div>
 										</div>	
 									</div>
