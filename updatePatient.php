@@ -11,7 +11,7 @@
 			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			$sql = "UPDATE `patient`SET `fullname` = '$firstname', `email` = '$lastname',`dateDeNaissance` = '$address1' WHERE `id` = '$id'";
 			$conn->exec($sql);
-			$sql2="select id from `medecin` where fullname ='$nommedecin'";
+			$sql2="select id from `medecin` where `fullname` ='$nommedecin'";
             $stmt = $conn->query($sql2);
 			$row = $stmt->fetch(PDO::FETCH_ASSOC);
 			$idm=$row['id'];

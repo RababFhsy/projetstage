@@ -8,7 +8,7 @@
 		    $id=$_POST['id'];
 			$datedebut = $_POST['datedebut'];
 			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$sql2="select id from `boitier` where ref ='$ref'";
+			$sql2="select id from `boitier` where `ref` ='$ref'";
             $stmt = $conn->query($sql2);
 			$row = $stmt->fetch(PDO::FETCH_ASSOC);
 			$idb=$row['id']; 

@@ -41,7 +41,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>E-Medecal data </title>
-    <meta name="description" content="E-Medecal data">
+    <meta name="description" content="Sufee Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="apple-touch-icon" href="apple-icon.png">
@@ -193,7 +193,7 @@
 		<!-- <div><a class="btn btn-warning btn-sm"  href="ajouterpatient.php">+Ajouter un patient </a>  <a class="btn btn-primary btn-sm" style="width : 200px" href="indexPatient.php">Actualiser la page</a> </div></br>
                 <div></div></br> -->
                 <!-- <div><a   class="btn btn-outline-primary"  href="ajouterpatient.php"> <i class="fa fa-plus" aria-hidden="true"></i> Ajouter patient  </a>  <a  class="btn btn-outline-primary" style="width : 150px" href="indexPatient.php"><i class="fa fa-refresh" aria-hidden="true"></i>   Actualiser </a> </div></br> -->
-                <div><a  class="btn btn-success"  href="ajouterpatient.php"><i class="fa fa-plus" aria-hidden="true"></i>  compte patient </a>  <a  class="btn btn-primary" style="width : 150px" href="indexPatient.php"><i class="fa fa-refresh" aria-hidden="true"></i>   Actualiser </a> </div></br>
+                <div><a  class="btn btn-success"  href="ajouterpatient.php"><i class="fa fa-plus" aria-hidden="true"></i>  compte patient </a></div></br>
                 
         
 			<table id="employee_data"  class="table table-hover" style="width : 1000px">

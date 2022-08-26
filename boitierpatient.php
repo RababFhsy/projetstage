@@ -5,8 +5,8 @@
 		try{
 			$ref = $_POST['ref'];
 		    $id=$_POST['id'];
+			$idb=$_POST['id'];
 			$datedebut = $_POST['datedebut'];
-			$idb=$_POST['idb'];
 			
 			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			$sql2="select id from `boitier` where ref ='$ref'";
