@@ -15,13 +15,13 @@
 			$row = $stmt->fetch(PDO::FETCH_ASSOC);
 			$idb=$row['id']; 
 
-			$sql1 = "update   `patientboitier` set  `datefin`='$datedebut' where `datefin`='0000-00-00' and `idb` ='$idb' ";
+			$sql1 = "UPDATE  `patientboitier` SET  `datefin`='$datedebut' where `datefin`='0000-00-00' and `idb` ='$idb' ";
             $conn->exec($sql1);
 
 		
 			
-			$sql1 = "UPDATE `patientboitier` SET  `idb`='$idb' , `datedebut`='$datedebut' WHERE `idp` = '$id' " ;
-            $conn->exec($sql1);
+			$sql11 = "UPDATE `patientboitier` SET  `idb`='$idb' , `datedebut`='$datedebut' WHERE `idp` = '$id' " ;
+            $conn->exec($sql11);
 		}catch(PDOException $e){
 			echo $e->getMessage();
 		}

@@ -5,7 +5,6 @@
 		try{
 			$ref = $_POST['ref'];
 		    $id=$_POST['id'];
-			$idp=$_POST['idp'];
 			$datedebut = $_POST['datedebut'];
 			
 			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
