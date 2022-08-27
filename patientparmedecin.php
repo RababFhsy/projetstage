@@ -306,7 +306,12 @@
 				</div>
 			
 											<div class="form-group">
-												<input type="submit" class="btn btn-outline-dark" type="submit" name="affecter" value="Affecter">
+												<button class="btn btn-outline-dark" type="submit" name="affecter" onclick="myFunction()" >Affecter</button>
+												<script>
+function myFunction() {
+  alert("I am an alert box!");
+}
+</script>
 											</div>
 										</div>	
 									</div>
